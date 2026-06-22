@@ -23,9 +23,11 @@ jobs:
         with:
           repository: 'Combodo/iTop'
           ref: 'develop'
+          path: 'docker/dev/itop'
 
       - name: List files
         run: |
+          echo $GITHUB_WORKSPACE
           pwd
           ls -la
           ls -la docker/dev/itop/
@@ -43,8 +45,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
-          context: "{{defaultContext}}:docker/dev"
-          file: ./Dockerfile
+          context: ./docker/dev
           platforms: linux/amd64
           push: true
           tags: |
