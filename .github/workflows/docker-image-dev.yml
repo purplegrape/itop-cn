@@ -1,4 +1,4 @@
-name: Docker Image CI for itop:latest-dev
+name: Docker Image CI for itop:3.3.0-dev
 
 on:
   workflow_dispatch:
