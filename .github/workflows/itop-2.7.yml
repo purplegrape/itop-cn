@@ -1,12 +1,11 @@
-name: Docker Image CI for itop-cn:3.2
+name: Docker Image CI for itop:2.7
 
 on:
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  NAME:     itop
-  VERSION: 3.2
+  VERSION: 2.7
 
 jobs:
   build-and-push:
@@ -31,13 +30,12 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
-          context: "{{defaultContext}}:docker/3.2"
+          context: "{{defaultContext}}:docker/2.7"
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.NAME }}:${{ env.VERSION }}
-            ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.NAME }}:latest
+            ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.VERSION }}
           outputs: |
             type=image,compression=zstd,force-compression=true
           cache-from: type=gha
