@@ -30,8 +30,6 @@ jobs:
           pwd
           ls -la
           ls -la docker/dev/itop/
-          rm -rf docker/dev/itop/.*
-          rm -rf docker/dev/itop/tests
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
@@ -53,6 +51,6 @@ jobs:
           tags: |
             ${{ env.REGISTRY }}/${{ github.actor }}/${{ env.NAME }}:${{ env.VERSION }}
           outputs: |
-            type=image,compression=zstd,force-compression=true
+            type=image,compression=zstd,compression-level=6,force-compression=true
           cache-from: type=gha
           cache-to: type=gha,mode=max
