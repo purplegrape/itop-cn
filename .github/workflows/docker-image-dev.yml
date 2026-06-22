@@ -6,7 +6,7 @@ on:
 env:
   REGISTRY: ghcr.io
   NAME: itop
-  VERSION: latest-dev
+  VERSION: 3.3.0-dev
 
 jobs:
   build-and-push:
