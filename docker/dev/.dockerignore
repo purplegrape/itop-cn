@@ -1,0 +1,17 @@
+# .dockerignore
+itop/.doc/
+itop/.github/
+itop/.idea/
+itop/.git/
+itop/.make/
+itop/tests/
+itop/validation/
+itop/.gitattributes
+itop/.gitignore
+itop/.phpstorm.meta.php
+itop/composer.json
+itop/composer.lock
+itop/composer.readme
+itop/Jenkinsfile
+itop/package.json
+itop/package-lock.json
