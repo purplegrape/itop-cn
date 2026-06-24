@@ -17,5 +17,5 @@ if [ $1 != "apache2ctl" ];then
   exec $@
 else
   install -d -m 755 -o www-data -g www-data /var/run/apache2 
-  exec gosu www-data:www-data "$@"
+  exec gosu www-data "$@"
 fi

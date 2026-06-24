@@ -30,6 +30,7 @@ ADD itop /usr/src/itop
 ADD --chmod=755 entrypoint.sh /
 
 VOLUME [ "/data" ]
+WORKDIR /data
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "apache2ctl", "-D", "FOREGROUND"]
 EXPOSE 8080/tcp
