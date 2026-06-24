@@ -12,7 +12,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
 RUN a2enmod headers ;\
     a2enmod expires ;\
     a2enmod deflate ;\
-    rm -rf /var/lib/apt /usr/share/perl /var/www/html
+    rm -rf /var/lib/apt/lists/* \
+           /usr/share/perl \
+           /usr/lib/x86_64-linux-gnu/perl \
+           /usr/lib/x86_64-linux-gnu/perl-base \
+           /var/www/html
 
 RUN unlink /etc/apache2/conf-enabled/other-vhosts-access-log.conf && \
     sed -i '/ErrorLog/d' /etc/apache2/sites-available/000-default.conf && \
