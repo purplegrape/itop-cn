@@ -6,12 +6,26 @@ LABEL org.opencontainers.image.title=iTop \
       org.opencontainers.image.authors="purplegrape4@gmail.com"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y apache2 libapache2-mod-php8.3 php8.3-cli php8.3-opcache php8.3-curl php8.3-gd php8.3-intl php8.3-mbstring php8.3-mysql php8.3-ldap php8.3-xml php8.3-soap php8.3-zip php8.3-xdebug php8.3-apcu graphviz mysql-client curl rsync tzdata && \
-    DEBIAN_FRONTEND=noninteractive apt-get autoclean
-
-RUN a2enmod headers ;\
-    a2enmod expires ;\
-    a2enmod deflate ;\
+    DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
+        apache2 libapache2-mod-php8.3 \
+        php8.3-apcu \
+        php8.3-cli \
+        php8.3-curl \
+        php8.3-gd \
+        php8.3-intl \
+        php8.3-ldap \
+        php8.3-mbstring \
+        php8.3-mysql \
+        php8.3-opcache \
+        php8.3-soap \
+        php8.3-xml \
+        php8.3-xdebug \
+        php8.3-zip \
+        graphviz mysql-client curl rsync tzdata && \
+    DEBIAN_FRONTEND=noninteractive apt-get autoclean && \
+    a2enmod headers && \
+    a2enmod expires && \
+    a2enmod deflate && \
     rm -rf /var/lib/apt/lists/* \
            /usr/share/perl \
            /usr/lib/x86_64-linux-gnu/perl \
