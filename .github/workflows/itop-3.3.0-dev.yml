@@ -23,7 +23,7 @@ jobs:
         with:
           repository: 'Combodo/iTop'
           ref: 'develop'
-          path: 'docker/dev/itop'
+          path: 'docker/3.3.0-dev/itop'
 
       - name: List files
         run: |
@@ -45,7 +45,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v7
         with:
-          context: ./docker/dev
+          context: ./docker/3.3.0-dev
           platforms: linux/amd64
           push: true
           tags: |
