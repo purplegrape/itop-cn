@@ -29,10 +29,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     a2enmod deflate && \
     a2disconf other-vhosts-access-log
 
+#RUN rm -rf /usr/share/perl /usr/lib/x86_64-linux-gnu/perl /usr/lib/x86_64-linux-gnu/perl-base
+
 RUN sed -i '/AllowOverride/s/None/All/g' /etc/apache2/apache2.conf && \
     sed -i '/ErrorLog/d' /etc/apache2/apache2.conf && \
     sed -i '/ports.conf/d' /etc/apache2/apache2.conf && \
-    echo "Listen 8080\nServerTokens Prod\nServerSignature off" >> /etc/apache2/apache2.conf && \
+    echo "\nListen 8080\nServerTokens Prod\nServerSignature off" >> /etc/apache2/apache2.conf && \
     echo "ErrorLog /proc/self/fd/2" >> /etc/apache2/apache2.conf && \
     echo "CustomLog /proc/self/fd/1 combined" >> /etc/apache2/apache2.conf && \
     sed -i 's/80/8080/g'  /etc/apache2/sites-available/000-default.conf && \
