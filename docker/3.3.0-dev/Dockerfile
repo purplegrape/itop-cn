@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 FROM docker.io/library/ubuntu:24.04
 LABEL org.opencontainers.image.title=iTop \
-      org.opencontainers.image.version=3.3 \
-      org.opencontainers.image.description="iTop-3.3 & ubuntu-24.04 & apache-2.4 & php-8.3" \
+      org.opencontainers.image.version=3.3.0-dev \
+      org.opencontainers.image.description="iTop-3.3.0-dev & ubuntu-24.04 & apache-2.4 & php-8.3" \
       org.opencontainers.image.authors="purplegrape4@gmail.com"
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -23,25 +23,21 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         php8.3-zip \
         graphviz mysql-client curl rsync tzdata && \
     DEBIAN_FRONTEND=noninteractive apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/* && \
     a2enmod headers && \
     a2enmod expires && \
     a2enmod deflate && \
-    rm -rf /var/lib/apt/lists/* \
-           /usr/share/perl \
-           /usr/lib/x86_64-linux-gnu/perl \
-           /usr/lib/x86_64-linux-gnu/perl-base \
-           /var/www/html
+    a2disconf other-vhosts-access-log
 
-RUN unlink /etc/apache2/conf-enabled/other-vhosts-access-log.conf && \
-    sed -i '/ErrorLog/d' /etc/apache2/sites-available/000-default.conf && \
-    sed -i '/CustomLog/d' /etc/apache2/sites-available/000-default.conf  && \
-    sed -i '/AllowOverride/s/None/All/g' /etc/apache2/apache2.conf && \
+RUN sed -i '/AllowOverride/s/None/All/g' /etc/apache2/apache2.conf && \
     sed -i '/ErrorLog/d' /etc/apache2/apache2.conf && \
-    echo "ServerTokens Prod\nServerSignature off" >> /etc/apache2/apache2.conf && \
+    sed -i '/ports.conf/d' /etc/apache2/apache2.conf && \
+    echo "Listen 8080\nServerTokens Prod\nServerSignature off" >> /etc/apache2/apache2.conf && \
     echo "ErrorLog /proc/self/fd/2" >> /etc/apache2/apache2.conf && \
     echo "CustomLog /proc/self/fd/1 combined" >> /etc/apache2/apache2.conf && \
     sed -i 's/80/8080/g'  /etc/apache2/sites-available/000-default.conf && \
-    sed -i -e 's/80/8080/g' -e 's/443/8443/g' /etc/apache2/ports.conf
+    sed -i '/ErrorLog/d' /etc/apache2/sites-available/000-default.conf && \
+    sed -i '/CustomLog/d' /etc/apache2/sites-available/000-default.conf
 
 COPY --from=tianon/gosu --chmod=755 /gosu /usr/bin/
 ADD itop /usr/src/itop
