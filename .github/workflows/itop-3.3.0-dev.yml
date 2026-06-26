@@ -30,7 +30,6 @@ jobs:
           echo $GITHUB_WORKSPACE
           pwd
           ls -la
-          ls -la docker/dev/itop/
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
