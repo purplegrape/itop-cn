@@ -6,9 +6,16 @@ itop/.git/
 itop/.make/
 itop/tests/
 itop/validation/
+itop/.editorconfig
 itop/.gitattributes
 itop/.gitignore
 itop/.phpstorm.meta.php
+itop/CONTRIBUTING.md
+itop/README.md
+itop/SECURITY.md
+itop/install.txt
+itop/license.txt
+itop/readme.txt
 itop/composer.json
 itop/composer.lock
 itop/composer.readme
