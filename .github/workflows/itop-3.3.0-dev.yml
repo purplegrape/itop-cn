@@ -21,8 +21,8 @@ jobs:
       - name: Checkout itop develop branch
         uses: actions/checkout@v6
         with:
-          repository: 'Combodo/iTop'
-          ref: 'develop'
+          repository: 'purplegrape/iTop'
+          ref: 'zh_cn'
           path: 'docker/3.3.0-dev/itop'
 
       - name: List files
