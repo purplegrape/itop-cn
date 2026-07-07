@@ -2,7 +2,7 @@
 
 set -e -x
 
-if [ ! -d /data/itop ];then
+if [ ! -d /data/itop/setup ];then
 	unzip -qn -d /data /opt/iTop-3.1.zip "web/*"
 	mv /data/web /data/itop
 	mkdir -p /data/itop/{conf,data,log,env-production,env-production-build,env-test,env-test-build}
