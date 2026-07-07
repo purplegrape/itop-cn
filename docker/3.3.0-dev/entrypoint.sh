@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ ! -d /data/itop ];then
+if [ ! -d /data/itop/setup ];then
   rsync -aqu /usr/src/itop/ /data/itop/
   mkdir -p /data/itop/{conf,data,log,env-production,env-production-build}
   chown -R 999:999 /data/itop/{conf,data,log,env-production,env-production-build}
