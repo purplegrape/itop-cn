@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ -d /usr/src/itop ];then
+  mkdir -p /usr/src/itop/data/backups/auto
+  chown -R 65532:65532 /usr/src/itop/{conf,data,log}
+fi
+
 if [ ! -d /data/itop/setup ];then
   rsync -aqu /usr/src/itop/ /data/itop/
   mkdir -p /data/itop/{conf,data,log,env-production,env-production-build}
@@ -14,6 +19,6 @@ fi
 if [ $1 != "apache2ctl" ];then
   exec $@
 else
-  install -d -m 755 -o 65532 -g 65532 /var/run/apache2 
+  install -d -m 755 -o 65532 -g 65532 /var/run/apache2
   exec gosu 65532:65532 "$@"
 fi
